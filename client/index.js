@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import Questions from './Questions'
 
 ReactDOM.render(
-  <Questions />,
+<div style={{display:'flex'}}>	
+  <Questions />
+  </div>,
   document.getElementById('app')
 )
