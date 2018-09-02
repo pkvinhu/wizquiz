@@ -15,23 +15,24 @@ const createForm = (FormComponent) => {
 
   handleSubmit = (e) => {
   	e.preventDefault()
-  	this.props.answer(e.target.value)
+  	this.props.answer(this.state.answer)
+  	// this.setState({answer:''})
   }
 
-  	render(){
-  	  return <FormComponent {...this.props} {...this.state} handleChange={this.handleChange} />
-  	}
+  render(){
+  	return <FormComponent {...this.props} {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} answer={this.answerQuestion}/>
+  }
   }
 }
 
 const RadioForm = ({question, key, type, handleChange, handleSubmit}) => {
 	return (
-  	  <form onChange={handleChange} onSubmit={handleSubmit}>
+  	  <form onSubmit={handleSubmit}>
   	    <label>{question.name}</label>
   	    {question.choices.map(choice=>{
   	    	return (
   	    	  <label>
-  	            <input type={type} name='answer' value={choice.value} />
+  	            <input onChange={handleChange} type={type} name='answer' value={choice.value} />
   	            {choice.label}
   	          </label>
   	    	)
@@ -41,7 +42,7 @@ const RadioForm = ({question, key, type, handleChange, handleSubmit}) => {
   	)
 }
 
-const SelectForm = ({question, key, handleChange, handleSubmit}) => {
+const SelectForm = ({question, key, handleChange, handleSubmit, answer}) => {
 	return (
 	  <form onChange={handleChange} onSubmit={handleSubmit}>
         <label>{question.name}</label>
